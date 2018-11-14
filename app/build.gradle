@@ -31,7 +31,7 @@ android {
     defaultConfig {
         minSdkVersion deps.build.minSdkVersion
         targetSdkVersion deps.build.targetSdkVersion
-        applicationId "com.uber.test"
+        applicationId "com.uber.app"
         versionCode 1
         versionName "1.0"
     }

@@ -12,9 +12,9 @@ This is following steps on [uber/RIBs Android Tutorial](https://github.com/uber/
 
 ### Installing
 
-Use **Android Studio** or execute the following command or 
+Use **Android Studio** or execute the following command or
 ```
-./gradlew :test:installDebug
+./gradlew :app:installDebug
 ```
 
 ## Test

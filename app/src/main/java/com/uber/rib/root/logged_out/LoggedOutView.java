@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.uber.rib.test.R;
+import com.uber.rib.app.R;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.uber.rib.core.InteractorBaseComponent;
 import com.uber.rib.core.ViewBuilder;
-import com.uber.rib.test.R;
+import com.uber.rib.app.R;
 import java.lang.annotation.Retention;
 
 import javax.inject.Scope;
