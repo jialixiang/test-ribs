@@ -1,16 +1,14 @@
 package com.uber.rib.root.logged_out;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.Pair;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.uber.rib.app.R;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
@@ -32,13 +30,14 @@ class LoggedOutView extends LinearLayout implements LoggedOutInteractor.LoggedOu
   }
 
   @Override
-  public Observable<String> loginName() {
+  public Observable<Pair<String, String>> loginName() {
     return RxView.clicks(findViewById(R.id.login_button))
-      .map(new Function<Object, String>() {
+      .map(new Function<Object, Pair<String, String>>() {
         @Override
-        public String apply(Object o) throws Exception {
-          TextView textView = (TextView) findViewById(R.id.edit_text);
-          return textView.getText().toString();
+        public Pair<String, String> apply(Object o) throws Exception {
+          TextView playerNameOne = (TextView) findViewById(R.id.player_name_1);
+          TextView playerNameTwo = (TextView) findViewById(R.id.player_name_2);
+          return Pair.create(playerNameOne.getText().toString(), playerNameTwo.getText().toString());
         }
       });
   }

@@ -1,7 +1,7 @@
 package com.uber.rib.root.logged_out;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.util.Pair;
 
 import com.uber.rib.core.Bundle;
 import com.uber.rib.core.Interactor;
@@ -23,6 +23,7 @@ import javax.inject.Inject;
 public class LoggedOutInteractor
     extends Interactor<LoggedOutInteractor.LoggedOutPresenter, LoggedOutRouter> {
 
+  @Inject Listener listener;
   @Inject LoggedOutPresenter presenter;
 
   @Override
@@ -31,12 +32,18 @@ public class LoggedOutInteractor
 
     presenter
       .loginName()
-      .subscribe(new Consumer<String>() {
+      .subscribe(new Consumer<Pair<String, String>>() {
         @Override
-        public void accept(String name) throws Exception {
-          Log.d("MOO", name);
+        public void accept(Pair<String, String> names) throws Exception {
+          if (!isEmpty(names.first) && !isEmpty(names.second)) {
+            listener.login(names.first, names.second);
+          }
         }
       });
+  }
+
+  private boolean isEmpty(@Nullable String string) {
+    return string == null || string.length() == 0;
   }
 
   @Override
@@ -51,6 +58,10 @@ public class LoggedOutInteractor
    * Presenter interface implemented by this RIB's view.
    */
   interface LoggedOutPresenter {
-    Observable<String> loginName();
+    Observable<Pair<String, String>> loginName();
+  }
+
+  public interface Listener {
+    void login(String userNameA, String userNameB);
   }
 }

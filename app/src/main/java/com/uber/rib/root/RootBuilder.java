@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import com.uber.rib.core.InteractorBaseComponent;
 import com.uber.rib.core.ViewBuilder;
 import com.uber.rib.app.R;
+import com.uber.rib.root.logged_in.LoggedInBuilder;
 import com.uber.rib.root.logged_out.LoggedOutBuilder;
 import com.uber.rib.root.logged_out.LoggedOutInteractor;
 
@@ -72,13 +73,19 @@ public class RootBuilder extends ViewBuilder<RootView, RootRouter, RootBuilder.P
   public abstract static class Module {
 
     @RootScope
+    @Provides
+    static LoggedOutInteractor.Listener loggedOutListener(RootInteractor rootInteractor) {
+      return rootInteractor.new LoggedOutListener();
+    }
+
+    @RootScope
     @Binds
     abstract RootInteractor.RootPresenter presenter(RootView view);
 
     @RootScope
     @Provides
     static RootRouter router(Component component, RootView view, RootInteractor interactor) {
-      return new RootRouter(view, interactor, component, new LoggedOutBuilder(component));
+      return new RootRouter(view, interactor, component, new LoggedOutBuilder(component), new LoggedInBuilder(component));
     }
   }
 
@@ -88,7 +95,10 @@ public class RootBuilder extends ViewBuilder<RootView, RootRouter, RootBuilder.P
     dependencies = ParentComponent.class
   )
   interface Component extends
-    InteractorBaseComponent<RootInteractor>, LoggedOutBuilder.ParentComponent, BuilderComponent {
+    InteractorBaseComponent<RootInteractor>,
+    BuilderComponent,
+    LoggedOutBuilder.ParentComponent,
+    LoggedInBuilder.ParentComponent {
 
     @dagger.Component.Builder
     interface Builder {
