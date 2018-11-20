@@ -1,7 +1,11 @@
 package com.uber.rib.root.logged_in;
 
+import android.view.ViewGroup;
 import com.uber.rib.core.RibTestBasePlaceholder;
 import com.uber.rib.core.RouterHelper;
+
+import com.uber.rib.root.logged_in.off_game.OffGameBuilder;
+import com.uber.rib.root.logged_in.tic_tac_toe.TicTacToeBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +16,9 @@ public class LoggedInRouterTest extends RibTestBasePlaceholder {
 
   @Mock LoggedInBuilder.Component component;
   @Mock LoggedInInteractor interactor;
+  @Mock ViewGroup parentView;
+  @Mock OffGameBuilder offGameBuilder;
+  @Mock TicTacToeBuilder ticTacToeBuilder;
 
   private LoggedInRouter router;
 
@@ -19,19 +26,13 @@ public class LoggedInRouterTest extends RibTestBasePlaceholder {
   public void setup() {
     MockitoAnnotations.initMocks(this);
 
-    router = new LoggedInRouter(interactor, component);
-  }
-
-  /**
-   * TODO: Delete this example and add real tests.
-   */
-  @Test
-  public void anExampleTest_withSomeConditions_shouldPass() {
-    // Use RouterHelper to drive your router's lifecycle.
-    RouterHelper.attach(router);
-    RouterHelper.detach(router);
-
-    throw new RuntimeException("Remove this test and add real tests.");
+    router = new LoggedInRouter(
+      interactor,
+      component,
+      parentView,
+      offGameBuilder,
+      ticTacToeBuilder
+    );
   }
 
 }

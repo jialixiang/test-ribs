@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 public class LoggedInInteractorTest extends RibTestBasePlaceholder {
 
   @Mock LoggedInRouter router;
+  @Mock MutableScoreStream scoreStream;
 
   private LoggedInInteractor interactor;
 
@@ -18,7 +19,7 @@ public class LoggedInInteractorTest extends RibTestBasePlaceholder {
   public void setup() {
     MockitoAnnotations.initMocks(this);
 
-    interactor = TestLoggedInInteractor.create();
+    interactor = TestLoggedInInteractor.create(scoreStream);
   }
 
 }

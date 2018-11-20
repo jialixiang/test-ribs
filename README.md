@@ -12,13 +12,22 @@ This is following steps on [uber/RIBs Android Tutorial](https://github.com/uber/
 
 ### Installing
 
-Use **Android Studio** or execute the following command or
+Use **Android Studio** or execute the following command
 ```
 ./gradlew :app:installDebug
 ```
+<table>
+<tr>
+<td><img src="https://user-images.githubusercontent.com/43363323/48781561-39875000-ed17-11e8-968c-e0799ee4b076.png" width="200"></td>
+<td><img src="https://user-images.githubusercontent.com/43363323/48786276-7bb58f00-ed21-11e8-842d-9a82f4583fca.png" width="200"></td>
+<td><img src="https://user-images.githubusercontent.com/43363323/48786387-bcada380-ed21-11e8-91cb-d86d172d94a9.png" width="200"></td>
+<td><img src="https://user-images.githubusercontent.com/43363323/48786357-ad2e5a80-ed21-11e8-8e82-167dc08d7331.png" width="200"></td>
+</tr>
+</table>
 
 ## Test
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/4859095/48468148-0845e600-e826-11e8-8ee2-1c3642286b0b.png">
 
-After you tapping the *LOGIN* button, you should be able to see *loginName* in logs.
-<img width="600" alt="image" src="https://user-images.githubusercontent.com/4859095/48468366-9752fe00-e826-11e8-92e7-f36828fd4db9.png">
+Execute the following command
+```
+./gradlew :app:testDebugUnitTest
+```
