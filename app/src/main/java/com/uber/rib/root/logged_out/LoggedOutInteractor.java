@@ -8,6 +8,7 @@ import com.uber.rib.core.Interactor;
 import com.uber.rib.core.RibInteractor;
 import com.uber.rib.core.Presenter;
 import com.uber.rib.core.Router;
+import com.uber.rib.root.UserName;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -36,7 +37,7 @@ public class LoggedOutInteractor
         @Override
         public void accept(Pair<String, String> names) throws Exception {
           if (!isEmpty(names.first) && !isEmpty(names.second)) {
-            listener.login(names.first, names.second);
+            listener.login(UserName.create(names.first), UserName.create(names.second));
           }
         }
       });
@@ -62,6 +63,6 @@ public class LoggedOutInteractor
   }
 
   public interface Listener {
-    void login(String userNameA, String userNameB);
+    void login(UserName playerOne, UserName playerTwo);
   }
 }

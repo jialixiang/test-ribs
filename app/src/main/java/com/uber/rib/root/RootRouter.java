@@ -19,6 +19,7 @@ package com.uber.rib.root;
 import android.support.annotation.Nullable;
 
 import com.uber.rib.core.ViewRouter;
+import com.uber.rib.root.UserName;
 import com.uber.rib.root.logged_in.LoggedInBuilder;
 import com.uber.rib.root.logged_out.LoggedOutRouter;
 import com.uber.rib.root.logged_out.LoggedOutBuilder;
@@ -55,8 +56,9 @@ public class RootRouter extends ViewRouter<RootView, RootInteractor, RootBuilder
     }
   }
 
-  void attachLoggedIn() {
-    attachChild(loggedInBuilder.build());
+  void attachLoggedIn(UserName playerOne, UserName playerTwo) {
+    // No need to attach views in any way.
+    attachChild(loggedInBuilder.build(playerOne, playerTwo));
   }
 
 }

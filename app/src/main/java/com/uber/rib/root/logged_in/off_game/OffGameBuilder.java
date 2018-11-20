@@ -4,11 +4,17 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.uber.rib.root.UserName;
+import com.uber.rib.root.logged_in.ScoreStream;
+
 import com.uber.rib.core.InteractorBaseComponent;
 import com.uber.rib.core.ViewBuilder;
 import com.uber.rib.app.R;
 import java.lang.annotation.Retention;
 
+import java.util.List;
+
+import javax.inject.Named;
 import javax.inject.Scope;
 import javax.inject.Qualifier;
 
@@ -53,7 +59,10 @@ public class OffGameBuilder
   }
 
   public interface ParentComponent {
+    @Named("player_one") UserName playerOne();
+    @Named("player_two") UserName playerTwo();
     OffGameInteractor.Listener listener();
+    ScoreStream scoreStream();
   }
 
   @dagger.Module

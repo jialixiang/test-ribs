@@ -7,7 +7,14 @@ import com.uber.rib.core.EmptyPresenter;
 import com.uber.rib.core.Interactor;
 import com.uber.rib.core.RibInteractor;
 
+import com.uber.rib.root.UserName;
 import com.uber.rib.root.logged_in.off_game.OffGameInteractor;
+import com.uber.rib.root.logged_in.off_game.OffGameInteractor;
+import com.uber.rib.root.logged_in.LoggedInBuilder.LoggedInInternal;
+import com.uber.rib.root.logged_in.tic_tac_toe.TicTacToeInteractor;
+
+import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Coordinates Business Logic for {@link LoggedInScope}.
@@ -16,6 +23,8 @@ import com.uber.rib.root.logged_in.off_game.OffGameInteractor;
  */
 @RibInteractor
 public class LoggedInInteractor extends Interactor<EmptyPresenter, LoggedInRouter> {
+
+  @Inject @LoggedInInternal MutableScoreStream scoreStream;
 
   @Override
   protected void didBecomeActive(@Nullable Bundle savedInstanceState) {
@@ -30,6 +39,20 @@ public class LoggedInInteractor extends Interactor<EmptyPresenter, LoggedInRoute
     @Override
     public void onStartGame() {
       getRouter().detachOffGame();
+      getRouter().attachTicTacToe();
+    }
+  }
+
+  class TicTacToeListener implements TicTacToeInteractor.Listener {
+
+    @Override
+    public void gameWon(@Nullable UserName winner) {
+      if (winner != null) {
+        scoreStream.addVictory(winner);
+      }
+
+      getRouter().detachTicTacToe();
+      getRouter().attachOffGame();
     }
   }
 
